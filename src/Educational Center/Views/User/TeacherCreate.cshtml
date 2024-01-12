@@ -1,0 +1,46 @@
+﻿@model Educational_Center.Data.ViewModels.TeacherUpdateViewModel
+
+@{
+    ViewData["Title"] = "Create Teacher";
+}
+
+<h2>Create Teacher</h2>
+
+<form asp-controller="User" asp-action="TeacherCreate" method="post" enctype="multipart/form-data">
+    <div>
+        <label asp-for="Teacher.Photo"></label>
+        <input asp-for="Teacher.Photo"/>
+    </div>
+
+    <div>
+        <label asp-for="Teacher.FirstName"></label>
+        <input asp-for="Teacher.FirstName" class="form-control" />
+    </div>
+
+    <div>
+        <label asp-for="Teacher.LastName"></label>
+        <input asp-for="Teacher.LastName" class="form-control" />
+    </div>
+
+    <div>
+        <label asp-for="Teacher.DateOfBirth"></label>
+        <input asp-for="Teacher.DateOfBirth" type="date" class="form-control" />
+    </div>
+
+    <div>
+        <label asp-for="Teacher.Email"></label>
+        <input asp-for="Teacher.Email" class="form-control" />
+    </div>
+    @foreach (var course in Model.Courses)
+    {
+        <div>
+            <input type="checkbox" name="SelectedCourseIds" value="@course.CourseId"
+            @(Model.SelectedCourseIds != null && Model.SelectedCourseIds.Contains(course.CourseId) ? "checked" : "") />
+            <label>@course.CourseName</label>
+        </div>
+    }
+
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+<a asp-controller="User" asp-action="TeacherView" class="btn btn-secondary">Back to Teacher View</a>

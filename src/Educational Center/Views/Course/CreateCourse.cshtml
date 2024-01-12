@@ -1,0 +1,31 @@
+﻿@model Educational_Center.Models.Course
+
+@{
+    ViewData["Title"] = "Create Course";
+}
+
+<h2>Create Course</h2>
+
+<form asp-action="CreateCourse" method="post">
+    <div>
+        <label asp-for="CourseName"></label>
+        <input asp-for="CourseName" />
+        <span asp-validation-for="CourseName"></span>
+    </div>
+
+    <div>
+        <label asp-for="Duration"></label>
+        <input asp-for="Duration" />
+        <span asp-validation-for="Duration"></span>
+    </div>
+
+    <div>
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description"></textarea>
+        <span asp-validation-for="Description"></span>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Create</button>
+</form>
+
+<a class="btn btn-secondary" asp-action="Index">Back to Course Index</a>

@@ -1,0 +1,64 @@
+﻿@model Educational_Center.Data.ViewModels.CourseDisplayView
+
+@{
+    ViewData["Title"] = "Update Course";
+}
+
+<h2>Update Course</h2>
+
+@if (Model != null)
+{
+    <form asp-controller="Course" asp-action="CourseUpdate" method="post">
+
+        <div>
+            <label asp-for="CourseName"></label>
+            <input asp-for="CourseName" class="form-control" />
+            <span asp-validation-for="CourseName" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="Duration"></label>
+            <input asp-for="Duration" class="form-control" />
+            <span asp-validation-for="Duration" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary" asp-route-courseId="@Model.CourseId">Update</button>
+    </form>
+
+    <h3>Students</h3>
+    <ul>
+        @foreach (var student in Model.Students)
+        {
+            <li>@student.FirstName @student.LastName <button class="btn btn-danger" type="submit" form="removeStudentForm" name="id" value="@student.StudentId">Remove</button></li>
+        }
+    </ul>
+
+    <h3>Teachers</h3>
+    <ul>
+        @foreach (var teacher in Model.Teachers)
+        {
+            <li>@teacher.FirstName @teacher.LastName <button class="btn btn-danger" type="submit" form="removeTeacherForm" name="id" value="@teacher.TeacherId">Remove</button></li>
+        }
+    </ul>
+
+    <!-- Hidden forms for student and teacher removal -->
+    <form id="removeStudentForm" asp-action="StudentRemove" asp-controller="Course" method="post">
+        <input type="hidden" name="courseId" value="@Model.CourseId" />
+    </form>
+
+    <form id="removeTeacherForm" asp-action="TeacherRemove" asp-controller="Course" method="post">
+        <input type="hidden" name="courseId" value="@Model.CourseId" />
+    </form>
+}
+else
+{
+    <p>No course found.</p>
+}
+
+<a class="btn btn-secondary" asp-controller="Course" asp-action="Index">Back to Course Index</a>

@@ -1,0 +1,61 @@
+﻿@using Educational_Center.Data.ViewModels;
+@model List<CourseDisplayView>
+
+@{
+    ViewData["Title"] = "Course Index";
+}
+
+<h2>Course Index</h2>
+<div>
+    <a class="btn btn-primary" asp-action="CreateCourse" asp-controller="Course">Add new course</a>
+</div>
+
+@if (Model != null)
+{
+    @foreach (var item in Model)
+    {
+        <form method="post">
+            <div>
+                <h3>Course Information</h3>
+                <p><strong>Course ID:</strong> @item.CourseId</p>
+                <p><strong>Course Name:</strong> @item.CourseName</p>
+                <!-- Add other course properties as needed -->
+            </div>
+
+            <div>
+                <h3>Students</h3>
+                <ul>
+                    @foreach (var student in item.Students)
+                    {
+                        <li>@student.FirstName</li>
+                        <li>@student.LastName</li>
+
+                        // <button class="btn btn-danger" type="submit" asp-route-id="@student.StudentId" asp-controller="Course" asp-action="StudentRemove">Remove Student</button>
+                    }
+                </ul>
+            </div>
+
+            <div>
+                <h3>Teachers</h3>
+                <ul>
+                    @foreach (var teacher in item.Teachers)
+                    {
+                        <li>@teacher.FirstName</li>
+                        <li>@teacher.LastName</li>
+
+                        // <button class="btn btn-danger" type="submit" asp-route-id="@teacher.TeacherId" asp-controller="Course" asp-action="TeacherRemove">Remove Teacher</button>
+                    }
+                </ul>
+            </div>
+
+
+
+            <a class="btn btn-secondary" asp-action="CourseUpdate" asp-controller="Course" asp-route-id="@item.CourseId">Edit Course</a>
+        </form>
+    }
+   
+}
+else
+{
+    <p>No course found.</p>
+}

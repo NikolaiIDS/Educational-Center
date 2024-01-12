@@ -1,0 +1,49 @@
+﻿@model Educational_Center.Data.ViewModels.StudentUpdateViewModel
+
+@{
+    ViewData["Title"] = "Update Student";
+}
+
+<h2>Update Student</h2>
+
+<form asp-controller="User" asp-action="StudentUpdate" method="post" enctype="multipart/form-data">
+    <div>
+        <img href="@Model.Student.Photo" alt="Student photo">
+        <label asp-for="Student.Photo"></label>
+        <input asp-for="Student.Photo"/>
+    </div>
+
+    <div>
+        <label asp-for="Student.FirstName"></label>
+        <input asp-for="Student.FirstName" class="form-control" />
+    </div>
+
+    <div>
+        <label asp-for="Student.LastName"></label>
+        <input asp-for="Student.LastName" class="form-control" />
+    </div>
+
+    <div>
+        <label asp-for="Student.DateOfBirth"></label>
+        <input asp-for="Student.DateOfBirth" type="date" class="form-control" />
+    </div>
+
+    <div>
+        <label asp-for="Student.Age"></label>
+        <input asp-for="Student.Age" class="form-control" />
+    </div>
+
+    <div>
+        <label asp-for="Student.ContactNumber"></label>
+        <input asp-for="Student.ContactNumber" class="form-control" />
+    </div>
+
+    <div>
+        <label asp-for="Student.CourseId"></label>
+        <select asp-for="Student.CourseId" asp-items="new SelectList(Model.Courses, nameof(Educational_Center.Models.Course.CourseId), nameof(Educational_Center.Models.Course.CourseName))" class="form-control"></select>
+    </div>
+
+    <button type="submit" asp-route-studentId="@Model.Student.StudentId" asp-controller="User" asp-action="StudentUpdate" class="btn btn-primary">Update</button>
+</form>
+
+<a asp-controller="User" asp-action="StudentView" class="btn btn-secondary">Back to Student View</a>

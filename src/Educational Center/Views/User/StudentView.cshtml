@@ -1,0 +1,24 @@
+﻿@model List<Educational_Center.Models.Student>
+
+@{
+    ViewData["Title"] = "Student View";
+}
+
+<h2>Student View</h2>
+
+<ul>
+    @foreach (var student in Model)
+    {
+        <li>
+            @student.FirstName 
+            @student.LastName
+            <img style="max-height: 500px; max-width: 500px" src="@student.Photo" alt="Student photo">
+            <a class="btn btn-primary" asp-controller="User" asp-action="StudentUpdate" asp-route-studentId="@student.StudentId">Edit</a> | 
+            <a class="btn btn-danger" asp-controller="User" asp-action="StudentDelete" asp-route-studentId="@student.StudentId">Delete</a>
+            
+        </li>
+            
+    }
+</ul>
+
+<a class="btn btn-primary" asp-controller="User" asp-action="StudentCreate">Create New Student</a>
